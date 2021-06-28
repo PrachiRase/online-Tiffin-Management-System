@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} About {% endblock title %}
+{% block aboutactive %} active {% endblock aboutactive %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'Manage/styles.css' %}">
+<div class="container text-start">
+  <div class="row py-lg-5">
+    <h1 class="fw-light fw-bold">About Us</h1><br>
+    <div class="text-start mx-auto">
+
+      <div class="about text-dark fw-bold">
+        We are a passionate lot! We believe in having a good time doing what we love, and we do love what we do.
+        We’re here to spread the love with each delicious bite we bake. It is in delighting you that we find our
+        motivation.
+        Our timeless classics include Rich Fruit and Healthy Vegetables, Healthy Meat, Different Masale.<br><br>
+
+        Started in 2021, Home Food Tiffin Service quickly established itself as a culinary icon par excellence in India.
+        With its unique Service of world fusion cuisine that can be found nowhere else, it enjoys patronage from the
+        A-list
+        clientele in pune. Featuring four of the best three-star Messes in the world, you never know what will arrive on
+        your tiffin the next time you order us.<br><br>
+        The Mess traces its humble beginnings to The Frying Pan, a successful chain started by our CEO, Mr. Nihal
+        Jadhav,
+        that featured for the first time the world's best cuisines in a pan
+
+        We love trying new things. If there's something baked you'd love to taste, do let us know and we'll make it
+        happen.
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock body %}

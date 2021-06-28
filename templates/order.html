@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Place-Order{% endblock title %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'Manage/styles.css' %}">
+<div class="row col-lg-12">
+    <!--Left Side-->
+    <div class="col-lg-6">
+        <form method="post" action="/order/">
+            <input type="hidden" name="itemsjson" id="itemsjson">
+            <input type="hidden" name="amount" id="amount">
+            {% csrf_token %}
+            <div class="input-group">
+                <div class="mb-2 mx-2">
+                    <label for="orderdate" id="orderdate" name="orderdate" class="form-label fs-5 bg-light p-1">Order
+                        Date:- {{orderdate}}</label>
+                    <!-- <input type="date" id="orderdate" name="orderdate" class="form-control rounded">-->
+                </div>
+            </div>
+            <div class="mb-2 input-group">
+                <div class="col mb-2 mx-2">
+                    <label for="cname" class="form-label fs-5">Name:- </label>
+                    <input type="text" id="cname" name="cname" class="form-control rounded" required>
+                </div>
+
+                <div class="col mb-2 mx-2">
+                    <label for="cemail" class="form-label fs-5">Email:-</label>
+                    <input type="email" id="cemail" name="cemail" class="form-control rounded" required>
+                </div>
+            </div>
+            <div class="mb-3 fs-5">
+                <label for="address" class="form-label">Address:-</label>
+                <input type="text" class="form-control" id="address" name="address" required>
+            </div>
+            <div class="mb-3 fs-5">
+                <div class="col">
+                    <label for="oname" class="form-label">Order Review:-</label>
+                    <!--<input type="text" class="form-control rounded" id="oname" name="oname">-->
+
+                    <!--Ul is important it shows purchased items-->
+                    <div>
+                        <ul class="list-group" id="items">
+                        </ul>
+                    </div>
+                    <!--Do no remove this ul-->
+                </div>
+                <div class="col">
+                    <label for="price" class="form-label">Total Price:- <span id="totalprice"></span></label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary fs-5">Place-Order</button>
+
+            <!-- <div class="mb-3 fs-5 input-group">
+                <div class="mb-2 mx-2">
+                    <label for="fromdate" class="form-label fs-5">From Date:- </label>
+                    <input type="date" id="fromdate" name="fromdate" class="form-control rounded">
+                </div>
+
+                <div class="mb-2 mx-2">
+                    <label for="todate" class="form-label fs-5">To Date:- </label>
+                    <input type="date" id="todate" name="todate" class="form-control rounded">
+                </div>
+            </div>
+            <div class="mb-3 fs-5 input-group">
+            <div class="mb-2 mx-2">
+                    <fieldset disabled>
+                        <label for="tdays" class="form-label">Total Days:-</label>
+                    <input type="text" class="form-control rounded" id="tdays" name="tdays">
+                    </fieldset>
+                </div>-->
+        </form>
+    </div>
+</div>
+
+<!--Right Side
+    <div class="col-lg-6 my-5">
+        <div class="thumbnail">
+        <a href="{% static 'Manage\images\logo.png' %}" target="_blank">
+          <img src="{% static 'Manage\images\logo.png' %}" alt="Lights" style="width:50%">
+          <div>
+            <h4>Title</h4>
+            <h5>Cost</h5>
+            <h6>Description</h6>
+          </div>
+        </a>
+      </div>
+    </div>-->
+
+</div>
+{% endblock body %}
+{% block js %}
+<script>
+    if (localStorage.getItem('cart') == null) {
+        var cart = {}
+    }
+    else {
+        cart = JSON.parse(localStorage.getItem('cart'));
+    }
+    console.log(cart);
+    var sum = 0;
+    var totalprice = 0;
+    if ($.isEmptyObject(cart)) {
+        mystr = `<p>Your Cart is Empty</p>`
+        $('#items').append(mystr);
+    }
+    else {
+        for (item in cart) {
+            let name = cart[item][1];
+            let qty = cart[item][0];
+            let itemprice = cart[item][2];
+            sum = sum + qty;
+            totalprice = totalprice + qty * itemprice;
+            mystr = `<li class="list-group-item d-flex justify-content-between align-items-center"> ${name} <span class="badge bg-primary rounded-pill">${qty}</span></li>`
+            $('#items').append(mystr);
+        }
+    }//else close
+    document.getElementById('cart').innerHTML = sum;
+    document.getElementById('totalprice').innerHTML = totalprice;
+
+    $('#itemsjson').val(JSON.stringify(cart));
+    {% if thank %}
+    alert('Thanks your id is {{id}} Proceed for payment')
+    localStorage.clear();
+    document.location = "/payment"
+    {% endif %}
+    $('#amount').val($('#totalprice').html())
+</script>
+{% endblock %}

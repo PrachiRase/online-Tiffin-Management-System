@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Contact Us {% endblock title %}
+{% block contactactive %} active {% endblock contactactive %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'Manage\styles.css' %}">
+<div class="contact">
+  <div class="container m-5">
+    <div class="form">
+      <div class="contact-info">
+        <h3 class="title">Let's get in touch</h3>
+        <p class="text"> Contact us with the following details. and fillup the form with the details. </p>
+        <div class="info">
+          <div class="social-information"> <i class="fa fa-map-marker"></i>
+            <p>Pune</p>
+          </div>
+          <div class="social-information"> <i class="fa fa-envelope-o"></i>
+            <p>contact@homefood.com</p>
+          </div>
+          <div class="social-information"> <i class="fa fa-mobile-phone"></i>
+            <p>9843893793 </p>
+          </div>
+        </div>
+        <div class="social-media">
+          <p>Connect with us :</p>
+          <div class="social-icons"> <a href="#"> <i class="fa fa-google-plus"></i>
+            </a> <a href="#"> <i class="fa fa-facebook"></i>
+            </a> <a href="#"> <i class="fa fa-instagram"></i> </a> </div>
+        </div>
+      </div>
+      <div class="contact-info-form"> <span class="circle one"></span> <span class="circle two"></span>
+        <form method="post" action="">
+          {% csrf_token %}
+          <h3 class="title">Contact us</h3>
+          <div class="social-input-containers">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name" />
+          </div>
+          <div class="social-input-containers">
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" />
+          </div>
+          <div class="social-input-containers">
+            <input type="phone" class="form-control" id="phone" name="phone" placeholder="Phone" />
+          </div>
+          <div class="social-input-containers textarea">
+            <textarea class="form-control" name="content" id="content" placeholder="Message"></textarea>
+          </div>
+          <input type="submit" class="btn btn-primary"/>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}
+
+<!--<div class="container col-lg-8 my-3">
+<form method="post" action="">
+{% csrf_token %}
+<h3>Home Foods Admin</h3>
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" aria-describedby="name">
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="email" name="email" aria-describedby="email">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="phone" class="form-label">Phone number</label>
+    <input type="phone" class="form-control" id="phone" name="phone">
+  </div>
+  <div class="mb-3">
+    <label for="content" class="form-label">How can we help you</label>
+    <textarea class="form-control" name="content" id="content" cols="30" rows="5"></textarea>
+  </div>
+ 
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>-->

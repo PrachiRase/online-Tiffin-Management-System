@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Forgot Password {% endblock title %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'Manage/css/style.css' %}">
+<div class="container my-5 col-lg-4 border border-dark rounded p-3">
+<form action='/forgotpass/' method='post'>
+{% csrf_token %}
+  <div class="mb-3">
+    <label for="emailpass" class="form-label"><h6>Email</h6></label>
+    <input type="text" class="form-control" id="emailpass" aria-describedby="emailpass" placeholder="Enter your Email">
+  </div>
+  <div class="mb-3">
+    <label for="newpass1" class="form-label"><h6>New Password</h6></label>
+    <input type="password" class="form-control" id="newpass1" placeholder="Choose new password">
+  </div>
+  <div class="mb-3">
+    <label for="newpass2" class="form-label"><h6>Confirm Password</h6></label>
+    <input type="password" class="form-control" id="newpass2" placeholder="Re-enter new password">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+{% endblock body %}

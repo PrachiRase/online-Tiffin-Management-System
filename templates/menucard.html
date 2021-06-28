@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Menu-card{% endblock title %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'Manage/styles.css' %}">
+<div>
+    <section class="py-2 text-center container">
+        <h1 class="fw-light">Select Menu</h1>
+    </section>
+
+    <div class="album py-3 bg-light">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {% for men in men %}
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <img src="" class="card-img-top" alt="">
+                        <div class="card-body">
+
+                            <h5 class="card-title" id="namemenu-{{men.mid}}">{{men.mtitle}}</h5>
+
+                            <p class="card-text">{{men.mdesc}}</p>
+
+                            <p class="card-text"><span id="pricemenu-{{men.mid}}">{{men.mprice}}</span> <i class="fa fa-inr" aria-hidden="true"></i></p>
+                            
+                            <span id="divmenu-{{men.mid}}" class="divmenu">
+                                <button id="menu-{{men.mid}}" class="btn btn-primary cart">Add to cart</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,86 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'Manage/styles.css' %}">
+<nav class="bgc navbar navbar-expand-lg navbar-light">
+  <div class="container-fluid">
+    <a href="{% url 'home' %}" class="logo"><img src="{% static 'Manage/images/logo.png' %}" width="140" height="70"
+        alt=""></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+        class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link {% block homeactive %}{% endblock homeactive %}" aria-current="page" href="/"><i
+              class="fa fa-home fa-lg" aria-hidden="true"></i> Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {% block contactactive %}{% endblock contactactive %}" href="/contact"><i
+              class="fa fa-address-card fa-lg" aria-hidden="true"></i> Contact-Us</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link {% block aboutactive %}{% endblock aboutactive %}" href="/about"><i
+              class="fa fa-info fa-lg" aria-hidden="true"></i> About Us</a>
+        </li>
+      </ul>
+      <!--Admin Dashboard-->
+      {% if user.is_staff %}
+      <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link {% block dashactive %}{% endblock dashactive %}" href="/custdets">Dashboard <span
+              class="glyphicon glyphicon-dashboard"></span></a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Welcome {{request.user}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+
+      <!-- Customer Navbar-->
+      {% elif user.is_authenticated %}
+      <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+        <li class="nav-item mx-2">
+          <a class="btn btn-outline-dark" href="{% url 'handlemenucard' %}">Place-Order </a>
+        </li>
+
+        <li class="nav-item mx-2">
+          <a class="btn btn-outline-dark {% block profileactive %}{% endblock profileactive %}" href="/custdets">Profile <span
+              class="glyphicon glyphicon-user"></span></a>
+        </li>
+
+        <li>
+          <button type="button" class="btn btn-outline-dark mx-2" data-bs-container="body" data-bs-trigger="focus" data-toggle="popover" id="popcart"
+            data-bs-html="true" data-bs-placement="bottom" data-bs-content="popoverhere"><span class="glyphicon glyphicon-shopping-cart"></span> Cart<span
+            id="cart">0</span>
+          </button>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="dropdown-toggle btn btn-outline-dark" href="#" id="navbarDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Welcome {{request.user}}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+      {% else %}
+      <!-- Button trigger Signup modal -->
+      <button type="button" class="btn btn-outline-dark mx-1" data-bs-toggle="modal" data-bs-target="#signupModal"><i
+          class="fa fa-user-plus" aria-hidden="true"></i> Sign-up
+      </button>
+      <!-- Button trigger Login modal -->
+      <button type="button" class="btn btn-outline-dark mx-1" data-bs-toggle="modal" data-bs-target="#loginModal"><span
+          class="glyphicon glyphicon-log-in"></span> Login
+      </button>
+      {% endif %}
+    </div>
+  </div>
+</nav>

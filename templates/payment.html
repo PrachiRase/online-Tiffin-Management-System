@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Payment Details {% endblock title %}
+{% block aboutactive %} active {% endblock aboutactive %}
+{% block body %}
+<link rel="stylesheet" href="{% static 'Manage/css/style.css' %}">
+<div class="container my-3">
+        <!-- For demo purpose -->
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h1 class="display-6 fw-bold">Payment</h1>
+            </div>
+        </div> <!-- End -->
+        <div class="row">
+        <form method="post" action="/payment/">
+        {% csrf_token %}
+            <div class="col-lg-6 mx-auto">
+                <div class="card card-header">
+                    <div class="shadow-sm pt-4">
+                        <!-- Credit card form tabs -->
+                        <ul role="tablist" class="nav nav-pills rounded nav-fill">
+                            <li class="nav-item">
+                                <a data-toggle="pill" href="#credit-card" class="nav-link active"><i
+                                        class="fa fa-credit-card" aria-hidden="true"></i> Credit Card</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-toggle="pill" href="#cod" class="nav-link"><i class="fa fa-money"
+                                        aria-hidden="true"></i> Cash on Delivery</a>
+                            </li>
+                        </ul>
+                    </div> <!-- End -->
+                    <!-- Credit card form content -->
+
+                    <!-- credit card info-->
+                    <div id="credit-card" class="tab-pane fade show active pt-3">
+                        <form>
+                            <div class="form-group">
+                                <label for="cowner">
+                                    <h6>Card Owner</h6>
+                                </label><input class="form-control" type="text" name="cowner"
+                                    placeholder="Card Owner Name" required>
+                            </div>
+                            <div class="form-group"> <label for="cnum">
+                                    <h6>Card number</h6>
+                                </label>
+                                <div class="input-group"> <input type="text" name="cnum"
+                                        placeholder="Valid card number" class="form-control" required>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text text-muted fs-4">
+                                            <i class="fa fa-cc-visa" aria-hidden="true"></i>
+                                            <i class="fa fa-cc-mastercard" aria-hidden="true"></i>
+                                            <i class="fa fa-cc-amex" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label><span class="hidden-xs">
+                                                <h6>Expiration Date</h6>
+                                            </span></label>
+                                        <div class="input-group">
+                                            <input type="number" placeholder="MM" name="month" class="form-control"
+                                                required> <input type="number" placeholder="YY" name="year"
+                                                class="form-control" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group mb-4"> <label data-toggle="tooltip" title="CVV">
+                                            <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
+                                        </label> <input type="text" name="cvv" required class="form-control"> </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">Confirm Payment</button>
+                                <a href="#"><button type="button" class="btn btn-primary">Cancel</button></a>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- End -->
+                    <!-- Paypal info
+                    <div id="paypal" class="tab-pane fade pt-3">
+                        <h6 class="pb-2">Select your paypal account type</h6>
+                        <div class="form-group "> <label class="radio-inline"> <input type="radio" name="optradio"
+                                    checked> Domestic </label> <label class="radio-inline">
+                                <input type="radio" name="optradio" class="ml-5">International </label></div>
+                        <p> <button type="button" class="btn btn-primary "><i class="fab fa-paypal mr-2"></i>
+                                Log into my Paypal</button> </p>
+                        <p class="text-muted"> Note: After clicking on the button, you will be directed to a
+                            secure gateway for payment. After completing the payment process, you will be
+                            redirected back to the website to view details of your order. </p>
+                    </div> End -->
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock body %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Edit-Profile {% endblock title %}
+{% block profileactive %}active{% endblock profileactive %}
+{% block body %}
+<div class="profile">
+    <div class="border border-dark rounded p-3">
+        <h3 class="text-center">Home Foods Tiffin services</h3>
+
+                <form action="/" method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="f_name" class="form-label">Firstname</label>
+                    <input type="text" class="form-control" id="f_name" name="f_name">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="l_name" class="form-label">Lastname</label>
+                    <input type="text" class="form-control" id="l_name" name="l_name">
+                </div>
+
+                <div class="mb-3">
+                    <label for="e_mail" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="e_mail" aria-describedby="e_mailHelp" name="e_mail">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a href="{% url 'handlecustdets' %}"><button type="button" class="btn btn-primary">Back</button></a>                      
+            </form>
+
+
+    </div>
+</div>
+{% endblock body %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Order Details {% endblock title %}
+{% block aboutactive %} active {% endblock aboutactive %}
+{% block body %}
+{% include 'dashnav.html' %}
+<style>
+  .my-custom-scrollbar {
+    position: relative;
+    height: 400px;
+    overflow: auto;
+  }
+
+  .table-wrapper-scroll-y {
+    display: block;
+  }
+</style>
+<div class="mx-3">
+  <div class="clearfix"></div>
+  <div class="order border border-dark p-3 rounded">
+    <header>
+      <div class="header">
+        <h3> Order Details</h3>
+        <div class="header-right">
+          <a href=""><button type="button" class="btn btn-info"><i class="fa fa-refresh" aria-hidden="true"></i>
+              Refresh</button></a>
+        </div>
+      </div>
+    </header>
+    <div class="clearfix"></div>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                Status
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">All</a></li>
+                <li><a class="dropdown-item" href="#">Deliver</a></li>
+                <li><a class="dropdown-item" href="#">Shipped</a></li>
+                <li><a class="dropdown-item" href="#">Pending</a></li>
+                <li><a class="dropdown-item" href="#">Cancelled</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="clearfix"></div>
+      <div class="table-wrapper-scroll-y my-custom-scrollbar">
+      <table class="table table-bordered border-dark ms-4">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Order-Name</th>
+            <th scope="col">Location</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order in order %}
+          <tr>
+            <td>{{order.order_id}}</td>
+            <td>{{order.cname}}</td>
+            <td>{{order.items_json}}</td>
+            <td>{{order.address}}</td>
+            <td><select class="form-select btn btn-primary" aria-label="Default select example">
+                <option selected>Select</option>
+                <option value="1">Deliverd</option>
+                <option value="2">Shipped</option>
+                <option value="3">Pending</option>
+                <option value="4">Cancelled</option>
+              </select>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock body %}

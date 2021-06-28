@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Dashboard {% endblock title %}
+{% block profileactive %}{% endblock profileactive %}
+{% block body %}
+<div class="mx-3">
+{% if user.is_staff %}
+<div>{% include 'sidenav1.html' %}</div>
+{% else %}
+<div>{% include 'sidenav.html' %}</div>
+{% endif %}
+</div>
+{% endblock body %}

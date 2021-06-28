@@ -1,0 +1,142 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="{% static 'Manage/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'Manage/css/glyphicon.css' %}">
+
+  <link rel="stylesheet" href="{% static 'Manage/css/bootstrap.css' %}">
+  <link rel="stylesheet" href="{% static 'Manage/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'Manage\bootstrap-social\bootstrap-social.css' %}">
+  <link rel="stylesheet" href="{% static 'Manage\font-awesome-4.7.0\css\font-awesome.css' %}">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500&family=Karla&family=Yusei+Magic&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap">
+
+  <title>{% block title %}{% endblock title %}</title>
+</head>
+
+<body>
+  <div>
+    {% include 'nav.html' %}
+  </div>
+  <!--Alert Code-->
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} mb-0 alert-dismissible fade show" role="alert">
+    <strong>Message: </strong> {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+  <!--Alert Code End-->
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalTitle">Login</h5>
+        </div>
+        <div class="modal-body">
+          <form action='/login/' method='post'>
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="loginusername" class="form-label">Enter Username</label>
+              <input type="text" class="form-control" id="loginusername" name="loginusername"
+                aria-describedby="loginusername" placeholder="Enter your username" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="loginpass" class="form-label">Password</label>
+              <input type="password" class="form-control" id="loginpass" name="loginpass"
+                placeholder="Enter your Password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+            <!-- Forgot Password -->
+            <a href="{% url 'handleforgotpass' %}"><button type="button" class="btn btn-primary">Forgot
+                Password</button></a>
+            <!-- Forgot Password -->
+
+          </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Signup Modal -->
+  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="signupModalTitle">Signup</h5>
+        </div>
+        <div class="modal-body">
+          <form action='/signup/' method='post'>
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="username" class="form-label">Enter Username</label>
+              <input type="text" class="form-control" id="username" name="username" aria-describedby="username"
+                placeholder="Choose unique username" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="firstname" class="form-label">Enter Firstname</label>
+              <input type="text" class="form-control" id="firstname" name="firstname" aria-describedby="firstname"
+                placeholder="Enter your firstname" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="lastname" class="form-label">Enter Lastname</label>
+              <input type="text" class="form-control" id="lastname" name="lastname" aria-describedby="lastname"
+                placeholder="Enter your lastname" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="semail" class="form-label">Email address</label>
+              <input type="semail" class="form-control" id="semail" name="semail" aria-describedby="emailHelp"
+                placeholder="name@example.com" required>
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="pass1" class="form-label">Password</label>
+              <input type="password" class="form-control" id="pass1" name="pass1" placeholder="Choose strong Password"
+                required>
+            </div>
+            <div class="mb-3">
+              <label for="pass2" class="form-label">Re-enter Password</label>
+              <input type="password" class="form-control" id="pass2" name="pass2" placeholder="Re-enter your password"
+                required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% block body %} {% endblock body %}
+  {% include 'footer.html' %}
+
+  <script src="{% static 'Manage/js/jquery.js' %}"></script>
+  <script src="{% static 'Manage/js/popper.js' %}"></script>
+  <script src="{% static 'Manage/js/bootstrap.js' %}"></script>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  {% include 'cart.html' %}
+  {% block js %} {% endblock %}
+</body>
+
+</html>

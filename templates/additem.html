@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Items {% endblock title %}
+{% block aboutactive %} active {% endblock aboutactive %}
+{% block body %}
+
+<!-- Item Portion -->
+{% include 'dashnav.html' %}
+<div class="item mx-3 border border-dark rounded p-3 m-3">
+  <h2>Menu Items</h2>
+  <hr>
+  <!-- Add item and search button
+  <a class="navbar-brand" href="#"><button type="submit" class="btn btn-outline-dark"><span class="glyphicon glyphicon-plus"></span></i>
+      Add Item</button></a>
+  <input class="me-2" type="search" placeholder="Search" aria-label="Search">
+  <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button> -->
+  <div class="clearfix"></div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Type</th>
+        <th scope="col">Price</th>
+        <th scope="col">Description</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for menu in menu %}
+      <tr>
+        <td>{{menu.mid}}</td>
+        <td>{{menu.mtitle}}</td>
+        <td>{{menu.mtype}}</td>
+        <td>{{menu.mprice}}</td>
+        <td>{{menu.mdesc}}</td>
+        <td><a href="/additem/{{menu.mid}}/modify/" class="btn btn-primary p-1">Edit</a>
+        <a href="/additem/{{menu.mid}}/delete/" class="btn btn-primary p-1">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="clearfix"></div>
+{% endblock body %}

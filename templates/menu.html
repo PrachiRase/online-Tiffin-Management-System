@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Create Menu {% endblock title %}
+{% block aboutactive %} active {% endblock aboutactive %}
+{% block body %}
+<!--top Header  -->
+<nav class="navbar navbar-expand-lg  navbar-light" style="background-color: #e3f2fd;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/custdets">Dashboard</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Order</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Manage Food
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/additem">Add Item</a></li>
+            <li><a class="dropdown-item" href="/modify">Edit Item</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/userdets">User</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="clearfix"></div>
+<!-- menu portion -->
+<div class="modify">
+  <h3 class="d-flex justify-content-center p-3">Add Item to Menu</h3>
+  <form method="post" enctype="multipart/form-data" class="row">
+  {% csrf_token %}
+    <fieldset disabled="disabled">
+    <div class="col-md-4">
+      <label for="mid" class="form-label">Menu-Id</label>
+      <input type="text" class="form-control" id="mid" name="mid">
+    </div>
+    </fieldset>
+    <div class="col-md">
+      <label for="mtitle" class="form-label">Title</label>
+      <input type="text" class="form-control" id="mtitle" name="mtitle">
+    </div>
+    <div class="col-md-4">
+      <label for="mtype" class="form-label">Type</label>
+      <select id="mtype" name="mtype" class="form-select">
+        <option selected>Veg</option>
+        <option>Non-Veg</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label for="mprice" class="form-label">Price <i class="fa fa-inr" aria-hidden="true"></i></label>
+      <input type="number" class="form-control" id="mprice" name="mprice">
+    </div>
+    <div class="col-md-6">
+      <label for="mimgs" class="form-label">Image</label>
+      <input type="file" class="form-control" id="mimgs" name="mimgs">
+    </div>
+    <div class="mb-12">
+      <label for="mdesc" class="form-label">Description</label>
+      <textarea class="form-control" id="mdesc" name="mdesc" rows="3"></textarea>
+    </div>
+
+    <div class="col-12">
+      <a class="navbar-brand" href="{% url 'handleadditem' %}"><button type="button" class="add">Back</button></a>
+      
+      <button type="submit" class="navbar-brand add"> Add</button></a>
+    </div>
+    </section>
+    <div class="clearfix"></div>
+  </form>
+</div>
+{% endblock body %}

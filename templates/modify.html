@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Edit-Item {% endblock title %}
+{% block aboutactive %} active {% endblock aboutactive %}
+{% block body %}
+{% include 'dashnav.html' %}
+<div class="clearfix"></div>
+<!-- menu portion -->
+<div class="modify border border-dark rounded p-3">
+  <h3 class="d-flex justify-content-center">Edit Food Item</h3>
+  {% for itemobject in itemobject %}
+  <form class="row w-70 m-3" action="/additem/{{itemobject.mid}}/modify/updated/" method="post">
+  {% endfor %}
+  {% csrf_token %}
+    <div class="col-sm">
+      <label for="inputName" class="form-label">Select Food Name</label>
+      <select id="inputName" class="form-select" name="food_name">
+        <option>Item1</option>
+        <option>Item2</option>
+        <option>Item3</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="inputType" class="form-label">Type</label>
+      <select id="inputType" class="form-select" name="veg">
+        <option selected>Veg</option>
+        <option>Non-Veg</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label for="inputPrice" class="form-label">Price</label>
+      <input type="number" class="form-control" id="inputPrice" name="price">
+    </div>
+    <div class="col-md-6">
+      <label for="inputname" class="form-label">Name</label>
+      <input type="text" class="form-control" id="inputname" name="name">
+    </div>
+    <div class="col-md-6">
+      <label for="inputImg" class="form-label">Image</label>
+      <input type="file" class="form-control" id="inputImg" name="image">
+    </div>
+    <div class="mb-12">
+      <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc"></textarea>
+    </div>
+
+    <div class="col-12 my-3">
+      <button class="add fs-5" type="submit"> Done</button>
+    </div>
+    </section>
+    <div class="clearfix"></div>
+  </form>
+</div>
+{% endblock body %}
